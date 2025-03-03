@@ -1,4 +1,6 @@
 import puppeteer from "puppeteer";
+import dotenv from "dotenv";
+dotenv.config();
 
 const URL = "https://www.accuweather.com/vi/vn/hanoi/353412/weather-forecast/353412";
 
@@ -6,7 +8,6 @@ export const getWeather = async () => {
   let browser = null;
   try {
     const browser = await puppeteer.launch({
-      headless: true,
       args: [
         "--disable-setuid-sandbox",
         "--no-sandbox",
