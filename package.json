@@ -5,8 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server",
-    "start": "nodemon server",
-    "postinstall": "npx puppeteer browsers install chrome"
+    "start": "nodemon server"
   },
   "keywords": [],
   "type": "module",
