@@ -13,10 +13,10 @@ export const getWeather = async () => {
         "--single-process",
         "--no-zygote",
       ],
-      executablePath: puppeteer.executablePath()
-        // process.env.NODE_ENV === "production" 
-        //     ? (process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium-browser") // Mặc định là Chromium
-        //     : puppeteer.executablePath()
+      executablePath:
+        process.env.NODE_ENV === "production"
+          ? process.env.PUPPETEER_EXECUTABLE_PATH
+          : puppeteer.executablePath()
     });
     const page = await browser.newPage(); 
 
