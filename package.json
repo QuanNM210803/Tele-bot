@@ -23,6 +23,6 @@
     "node-telegram-bot-api": "^0.66.0",
     "nodemon": "^3.1.9",
     "openai": "^4.86.1",
-    "puppeteer": "^24.3.0"
+    "puppeteer": "^19.7.2"
   }
 }
