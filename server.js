@@ -2,6 +2,7 @@ import { options } from './sources/utils/options.js';
 import { bot } from './sources/config/telegram-config.js';
 import { geminiResponse } from './sources/service/gemini-response.js';
 import './sources/schedules/schedule-job.js';
+import express from "express";
 
 Object.keys(options).forEach((key) => {
   bot.onText(new RegExp(`/${key}(?: (.+))?`), (msg, match) => {
@@ -21,3 +22,12 @@ bot.on('message', async (msg) => {
     bot.sendMessage(chatId, response);
   }
 });
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send("Bot is running...");
+});
+
+app.listen(PORT, () => console.log(`🚀 Server đang chạy trên cổng ${PORT}`));
