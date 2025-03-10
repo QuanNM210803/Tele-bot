@@ -1,27 +1,16 @@
-import puppeteer from "puppeteer";
 import dotenv from "dotenv";
+import { init_browser } from "../common/init-browser.js";
 dotenv.config();
 
 const URL = "https://www.accuweather.com/vi/vn/hanoi/353412/weather-forecast/353412";
 
 export const getWeather = async () => {
-  const browser = await puppeteer.launch({
-    args: [
-      "--disable-setuid-sandbox",
-      "--no-sandbox",
-      "--single-process",
-      "--no-zygote",
-    ],
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath()
-  });
+  const browser = init_browser;
   try {
-    const page = await browser.newPage(); 
+    const page = await browser.newPage();
 
     await page.setUserAgent(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     );
 
     await page.goto(URL, { waitUntil: "domcontentloaded" });
@@ -54,7 +43,7 @@ export const getWeather = async () => {
         return { tempHigh, tempLow, phrase, precip, icon };
       })[1];
     });
-    
+
     let weatherIconTomorrow = "🌥️";
     if (weatherData.phrase.toLocaleLowerCase().includes("nắng")) weatherIconTomorrow = "☀️";
     if (weatherData.phrase.toLocaleLowerCase().includes("mưa")) weatherIconTomorrow = "🌧️";
